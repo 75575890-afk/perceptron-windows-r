@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+      - name: Revisar estilo (PEP 8)
+        run: flake8 . --max-line-length 100 --exclude .venv,venv
+      - name: Ejecutar el programa
+        run: python main.py --datos datos/pacientes.csv --objetivo diagnostico
