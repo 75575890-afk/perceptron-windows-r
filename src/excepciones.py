@@ -1,3 +1,6 @@
-class DatosInvalidosError(Exception): pass
+class DatosInvalidosError(Exception):
+    pass
 
-class ModeloNoEntrenadoError(Exception): pass
+
+class ModeloNoEntrenadoError(Exception):
+    pass
