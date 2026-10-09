@@ -38,7 +38,7 @@ def main():
     X = estandarizar(datos[FEATURES_BASE].to_numpy(dtype=float))
     y = datos[args.objetivo].to_numpy()
     X_tr, X_te, y_tr, y_te = dividir(X, y)
-    modelo2 = Perceptron(tasa_aprendizaje=0.5, epocas=30)
+    modelo2 = Perceptron(tasa_aprendizaje=0.5, epocas=30, decaimiento=0.1)
     modelo2.entrenar(X_tr, y_tr)
     y_pred = modelo2.predecir(X_te)
     print("Modelo 2 (tasa 0.5)")
