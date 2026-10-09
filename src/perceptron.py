@@ -6,15 +6,11 @@ from src.excepciones import ModeloNoEntrenadoError
 class Perceptron:
     """Clasificador binario: predice 1 si X·w + b >= 0, si no 0."""
 
-<<<<<<< HEAD
-    def __init__(self, tasa_aprendizaje=0.01, epocas=50):
+    def __init__(self, tasa_aprendizaje=0.01, epocas=50, decaimiento=0.0):
         if tasa_aprendizaje <= 0:
             raise ValueError('La tasa de aprendizaje debe ser positiva')
         if epocas <= 0:
             raise ValueError('Las épocas deben ser positivas')
-=======
-    def __init__(self, tasa_aprendizaje=0.01, epocas=50, decaimiento=0.0):
->>>>>>> 4113b5eb7dba1a7c62b55e903b2ce6cf81296a11
         self.tasa = tasa_aprendizaje
         self.epocas = epocas
         self.decaimiento = decaimiento
@@ -41,9 +37,6 @@ class Perceptron:
 
     def predecir(self, X):
         """Devuelve un array de 0 y 1, uno por fila de X."""
-<<<<<<< HEAD
         if self.w is None:
             raise ModeloNoEntrenadoError('El modelo no está entrenado')
-=======
->>>>>>> 4113b5eb7dba1a7c62b55e903b2ce6cf81296a11
         return np.where(X @ self.w + self.b >= 0, 1, 0)

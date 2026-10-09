@@ -51,12 +51,8 @@ def main():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     try:
         main()
     except (DatosInvalidosError, ValueError) as e:
         print("Error:", e)
         sys.exit(1)
-=======
-    main()
->>>>>>> 4113b5eb7dba1a7c62b55e903b2ce6cf81296a11
