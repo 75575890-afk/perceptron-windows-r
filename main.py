@@ -18,9 +18,13 @@ def main():
     parser = argparse.ArgumentParser(description="Clasificador con Perceptrón")
     parser.add_argument("--datos", default="datos/pacientes.csv")
     parser.add_argument("--objetivo", default="diagnostico")
+    parser.add_argument("--features", nargs="+",
+                        default=["concavidad", "puntos_concavos", "area", "textura"])
     args = parser.parse_args()
-
     df = cargar_datos(args.datos, args.objetivo)
+    faltantes = [f for f in args.features if f not in df.columns]
+    if faltantes:
+        raise DatosInvalidosError(f"Columnas inexistentes: {', '.join(faltantes)}")
 
     # ---------------- Modelo 1: básico ----------------
     datos = limpiar(df, FEATURES_BASE)
@@ -48,6 +52,16 @@ def main():
 
     # ---------------- Modelo 3: otras features ----------------
     # Tarea 5: permitir elegir las features con --features
+    datos = limpiar(df, args.features)
+    X = estandarizar(datos[args.features].to_numpy(dtype=float))
+    y = datos[args.objetivo].to_numpy()
+    X_tr, X_te, y_tr, y_te = dividir(X, y)
+    modelo3 = Perceptron(tasa_aprendizaje=0.01, epocas=30)
+    modelo3.entrenar(X_tr, y_tr)
+    y_pred = modelo3.predecir(X_te)
+    print("Modelo 3 (tasa 0.01, features:", ", ".join(args.features) + ")")
+    print("  accuracy:", round(accuracy(y_te, y_pred), 3))
+    print("  errores por época:", modelo3.errores_por_epoca[:10], "...")
 
 
 if __name__ == "__main__":
