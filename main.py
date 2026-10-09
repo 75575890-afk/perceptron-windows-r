@@ -50,6 +50,8 @@ def main():
     y_pred = modelo2.predecir(X_te)
     print("Modelo 2 (tasa 0.5)")
     print("  accuracy:", round(accuracy(y_te, y_pred), 3))
+    print("  error:", round(error_clasificacion(y_te, y_pred), 3))
+    print("  matriz:", matriz_confusion(y_te, y_pred).tolist())
     print("  errores por época:", modelo2.errores_por_epoca[:10], "...")
 
     # ---------------- Modelo 3: otras features ----------------
