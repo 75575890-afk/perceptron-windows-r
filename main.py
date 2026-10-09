@@ -24,8 +24,7 @@ def main():
     df = cargar_datos(args.datos, args.objetivo)
     faltantes = [f for f in args.features if f not in df.columns]
     if faltantes:
-        # TODO: cambiar a DatosInvalidosError cuando la Tarea 2 esté en develop
-        raise ValueError(f"Columnas inexistentes: {', '.join(faltantes)}")
+        raise DatosInvalidosError(f"Columnas inexistentes: {', '.join(faltantes)}")
 
     # ---------------- Modelo 1: básico ----------------
     datos = limpiar(df, FEATURES_BASE)
